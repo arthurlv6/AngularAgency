@@ -1,0 +1,74 @@
+<form class="form-horizontal" name="productPriceForm"
+      novalidate>
+    <fieldset>
+        <legend>Product Price</legend>
+        <div class="form-group"
+             ng-class="{'has-error':productPriceForm.inputPrice.$invalid &&
+                                    productPriceForm.inputPrice.$dirty}">
+            <label class="col-md-2 control-label"
+                   for="inputPrice">Price</label>
+
+            <div class="col-md-4">
+                <input class="form-control"
+                       id="inputPrice"
+                       name="inputPrice"
+                       type="number"
+                       placeholder="Product Price (required)"
+                       ng-model="vm.product.price"
+                       required />
+            </div>
+            <span class="help-block has-error">
+                <span ng-show="productPriceForm.inputPrice.$error.required">
+                    Product price is required.
+                </span>
+            </span>
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error':productPriceForm.inputCost.$invalid &&
+                                    productPriceForm.inputCost.$dirty}">
+            <label class="col-md-2 control-label"
+                   for="inputCost">Cost</label>
+
+            <div class="col-md-4">
+                <input class="form-control"
+                       id="inputCost"
+                       name="inputCost"
+                       type="number"
+                       placeholder="Product Cost (required)"
+                       ng-model="vm.product.cost"
+                       required />
+            </div>
+            <span class="help-block has-error">
+                <span ng-show="productPriceForm.inputCost.$error.required">
+                    Product cost is required.
+                </span>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                <span>
+                    <button class="btn btn-primary"
+                            style="width:80px;margin-right:10px"
+                            ng-click="vm.submit(productPriceForm.$valid)"
+                            ng-disabled="productPriceForm.$invalid">
+                        Save
+                    </button>
+                </span>
+                <span>
+                    <button class="btn btn-default"
+                            style="width:70px"
+                            ng-click="vm.back()">
+                        Back
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group"
+             ng-show="vm.message">
+            <div class="col-md-12">
+                <pre style="font: inherit">{{vm.message }}</pre>
+            </div>
+        </div>
+    </fieldset>
+</form>

@@ -1,0 +1,58 @@
+<div class="panel panel-primary"
+     ng-controller="schoolListCtrl as vm">
+    <div class="panel-heading"
+         style="font-size:large">
+        school List
+    </div>
+    <div class="panel-body">
+        <form class="navbar-form">
+            <div class="form-group">
+                <input type="text"
+                       class="form-control"
+                       style="width: 300px;"
+                       placeholder="school Name or Code (letter sensitive)"
+                       ng-model="vm.schoolSearchInput">
+            </div>
+
+            <button type="submit"
+                    class="btn btn-default"
+                    ng-click="vm.search()">
+                Search
+            </button>
+            
+            <div ng-show="vm.message">{{vm.message}}</div>
+        </form>
+        <table class="table table-hover table-striped table-responsive">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>Area</td>
+                    <td>Profession</td>
+                    <td>Fee</td>
+                    <td>Address</td>
+                    <td>Website</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="school in vm.schools">
+                    <td>{{ school.id }}</td>
+                    <td>
+                        <a ui-sref="productDetail({productId: product.id})">
+                            {{ school.name}}
+                        </a>                        
+                    </td>
+                    <td>{{ school.area }}</td>
+                    <td>{{ school.profession }}</td>
+                    <td>{{ school.fee | currency }}</td>
+                    <td>{{ school.address }}</td>
+                    <td>{{ school.website }}</td>
+                    <td>
+                        <a ng-click="vm.edit(school)">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

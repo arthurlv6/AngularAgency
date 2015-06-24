@@ -1,0 +1,3 @@
+﻿enable-migrations -ContextTypeName Agency.Data.DataContexts.AgencyDbContext -MigrationsDirectory DataContexts\Migrations
+add-migration -ConfigurationTypeName Agency.Data.DataContexts.Migrations.Configuration "IntialCreate"
+update-database -ConfigurationTypeName Agency.Data.DataContexts.Migrations.Configuration -verbose
