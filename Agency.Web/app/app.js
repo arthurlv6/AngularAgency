@@ -13,17 +13,17 @@
                 $logProvider.debugEnabled(true);
                 $provide.decorator('$log', ['$delegate', logDecorator]);
 
-                $urlRouterProvider.otherwise("/products");
+                $urlRouterProvider.otherwise("/customers");
                 $stateProvider
                     .state("home", {
                         url: "/",
                         templateUrl: "app/welcomeView.html"
                     })
                     // Products
-                    .state("productList", {
-                        url: "/products",
-                        templateUrl: "app/products/productListView.html",
-                        controller: "ProductListCtrl as vm"
+                    .state("customersList", {
+                        url: "/customers",
+                        templateUrl: "app/customers/customerView.html",
+                        controller: "customerCtrl as vm"
                     })
                     .state("login", {
                         url: "/login",

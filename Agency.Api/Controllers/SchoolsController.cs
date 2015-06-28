@@ -13,6 +13,9 @@ using Agency.Data.DataContexts;
 using Agency.Data.Entities;
 using System.Web.Http.Cors;
 using System.Web.OData;
+using AutoMapper;
+using Agency.Api.ViewModels;
+
 namespace Agency.Api.Controllers
 {
     public class SchoolsController : ApiController
@@ -25,7 +28,11 @@ namespace Agency.Api.Controllers
         {
             try
             {
-                return Ok(db.Schools.AsQueryable());
+                //var data=db.Schools.AsQueryable();
+                //Mapper.CreateMap<School, ViewModelSchool>();
+                //IList<ViewModelSchool> viewModelList =Mapper.Map<IList<School>, IList<ViewModelSchool>>(data.ToList());
+
+                return Ok(db.Schools.Where(d=>d.SchoolType.Id==1).AsQueryable());
             }
             catch (Exception ex)
             {
@@ -38,11 +45,16 @@ namespace Agency.Api.Controllers
         public async Task<IHttpActionResult> GetSchool(long id)
         {
             School school = await db.Schools.FindAsync(id);
-            if (school == null)
+            if (id > 0)
             {
-                return NotFound();
+                if (school == null)
+                {
+                    return NotFound();
+                }
+            }else
+            {
+                school = new School() { UserId= "12ae3ecb-c59d-4ebf-9826-2ccbeb9f7838",SchoolTypeId=1,CreateDate=DateTime.Now };
             }
-
             return Ok(school);
         }
 

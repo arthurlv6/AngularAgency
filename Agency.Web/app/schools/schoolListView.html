@@ -15,12 +15,17 @@
             </div>
 
             <button type="submit"
-                    class="btn btn-default"
+                    class="btn btn-default btn-primary"
                     ng-click="vm.search()">
                 Search
             </button>
             
             <div ng-show="vm.message">{{vm.message}}</div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button class="btn btn-default btn-primary" ng-click="vm.add()"> Add</button>
+                </li>
+            </ul>
         </form>
         <table class="table table-hover table-striped table-responsive">
             <thead>
@@ -30,26 +35,103 @@
                     <td>Area</td>
                     <td>Profession</td>
                     <td>Fee</td>
-                    <td>Address</td>
-                    <td>Website</td>
-                    <td></td>
+                    <td>Commission</td>
+                    <td>SchoolType</td>
+                    <td colspan="2"></td>
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="school in vm.schools">
+            <tbody ng-repeat="school in vm.schools">
+                <tr>
                     <td>{{ school.id }}</td>
                     <td>
-                        <a ui-sref="productDetail({productId: product.id})">
                             {{ school.name}}
-                        </a>                        
                     </td>
                     <td>{{ school.area }}</td>
                     <td>{{ school.profession }}</td>
                     <td>{{ school.fee | currency }}</td>
-                    <td>{{ school.address }}</td>
-                    <td>{{ school.website }}</td>
+                    <td>{{ school.commission | currency }}</td>
+                    <td>{{ school.schoolTypeId }}</td>
+                    <td>
+                        <a ng-click="vm.detail(school.id)">Detail</a>
+                    </td>
                     <td>
                         <a ng-click="vm.edit(school)">Edit</a>
+                    </td>
+                </tr>
+                <tr ng-show="school.show">
+                    <td colspan="9">
+                        <div>
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Website
+                                </dt>
+
+                                <dd>
+                                    {{ school.website }}
+                                </dd>
+                                <dt>
+                                    Email
+                                </dt>
+
+                                <dd>
+                                    {{ school.email }}
+                                </dd>
+                                <dt>
+                                    Address
+                                </dt>
+
+                                <dd>
+                                    {{ school.address }}
+                                </dd>
+
+                                <dt>
+                                    ContactName
+                                </dt>
+
+                                <dd>
+                                    {{ school.contactName }}
+                                </dd>
+
+                                <dt>
+                                    ContactNumber
+                                </dt>
+
+                                <dd>
+                                    {{ school.contactNumber }}
+                                </dd>
+
+                                <dt>
+                                    ContactOthers
+                                </dt>
+
+                                <dd>
+                                    {{ school.contactOthers }}
+                                </dd>
+
+                                <dt>
+                                    Detail
+                                </dt>
+
+                                <dd>
+                                    {{ school.detail }}
+                                </dd>
+                                <dt>
+                                    Operator
+                                </dt>
+
+                                <dd>
+                                    {{ school.operator }}
+                                </dd>
+                                <dt>
+                                    CreateDate
+                                </dt>
+
+                                <dd>
+                                    {{ school.createDate }}
+                                </dd>
+
+                            </dl>
+                        </div>
                     </td>
                 </tr>
             </tbody>

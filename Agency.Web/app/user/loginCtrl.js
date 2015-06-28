@@ -1,6 +1,13 @@
 ﻿(function () {
     "use strict";
     var app = angular.module("main");
+    app.directive("agencyNarbar", function () {
+        return {
+            restrict: 'A',
+            templateUrl: '/navbar.html',
+            controller: 'ModalRegisterCtrl'
+        }
+    });
     app.controller('ModalRegisterCtrl', function ($scope, $modal, currentUser, userAccount) {
         var html = "";
         $scope.isLoggedIn = function () {

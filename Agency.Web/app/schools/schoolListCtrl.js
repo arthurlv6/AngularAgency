@@ -1,25 +1,23 @@
 (function () {
     "use strict";
     var app = angular.module("main");
-
-        app.controller("schoolListCtrl",
-                     ["schoolResource", '$log','$modal',
-                         schoolListCtrl]);
+        app.controller("schoolListCtrl",["schoolResource", '$log', '$modal', schoolListCtrl]);
         function schoolListCtrl(schoolResource, $log, $modal) {
-        var vm = this;
+            var vm = this;
         vm.schoolSearchInput = "";
         schoolResource.query({
-                //$filter: "contains(Name, 'A') and Fee ge 1000 and Fee le 2000",
-                $orderby: "Id desc"
+                $orderby: "CreateDate",
+                $top:10
             },
             function (data) {
-                console.log(data);
                 vm.schools = data;
+                console.log("data", data);
             });
         vm.search = function() {
             schoolResource.query({
                 $filter: "contains(Name, '" + vm.schoolSearchInput + "')",
-                    $orderby: "Name"
+                $orderby: "CreateDate",
+                $top:10
                 },
                 function(data) {
                     vm.schools = data;
@@ -27,7 +25,7 @@
                 });
         };
         vm.edit = function (school) {
-            console.log(school);
+            //console.log(school);
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: "/app/schools/_addOrEdit.html",
@@ -40,10 +38,40 @@
                 }
             });
         };
+        vm.detail = function (id) {
+            angular.forEach(vm.schools, function (school) {
+                if (school.id === id) {
+                    school.show = !school.show;
+                }
+            });
+        }
+        vm.add = function () {
+            schoolResource.get({ id: 0 },
+            function (data) {
+                var modalInstance = $modal.open({
+                    animation: true,
+                    templateUrl: "/app/schools/_addOrEdit.html",
+                    controller: 'modalInstanceCtrl',
+                    size: '',
+                    resolve: {
+                        schoolItem: function () {
+                            return data;
+                        }
+                    }
+                });
+            });
+            
+        };
     }
-        app.controller("modalInstanceCtrl", ["schoolResource", "currentUser","schoolItem","$scope", modalInstanceCtrl]);
-        function modalInstanceCtrl(schoolResource, currentUser,schoolItem,$scope) {
-            $scope.school=schoolItem;
+        app.controller("modalInstanceCtrl", ["schoolResource", "currentUser", "schoolItem", "$scope", "$modalInstance", modalInstanceCtrl]);
+        function modalInstanceCtrl(schoolResource, currentUser, schoolItem, $scope, $modalInstance) {
+            if (schoolItem.id === 0) {
+                $scope.title = "Add";
+            } else {
+                $scope.title = "Edit";
+            }
+            $scope.school = schoolItem;
+            console.log("schoolItem", schoolItem);
             $scope.ok = function (isValid) {
                 if (isValid) {
                     if ($scope.school && $scope.school.id) {
@@ -60,7 +88,7 @@
                 }
             };
             $scope.cancel=function(){
-
+                $modalInstance.dismiss('cancel');
             };
         }
 }());
