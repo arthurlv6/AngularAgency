@@ -1,6 +1,6 @@
 ﻿<nav class="navbar navbar-inverse">
     <div class="container">
-        <a class="navbar-brand">Angule + WebApi = Amaze</a>
+        <a class="navbar-brand">Agency</a>
         <div class="navbar-header">
             <button type="button"
                     class="navbar-toggle"
@@ -13,24 +13,27 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" ng-show="isLoggedIn()">
-                <li><a ui-sref="schoolList">School List</a></li>
-                <li><a ui-sref="productList">Product List</a></li>
+            <ul class="nav navbar-nav" ng-hide="isLoggedIn()">
+                <li><a ui-sref="customers"><i class="fa fa-group"></i>Customers</a></li>
+                <li><a ui-sref="schoolList"><i class="fa fa-sitemap"></i>Contracts</a></li>
+                <li><a ui-sref="schoolList"><i class="fa fa-bell"></i>Notifications</a></li>
+                <li><a ui-sref="schoolList"><i class="fa fa-gears"></i>Settings</a></li>
+                <li><a ui-sref="schoolList"><i class="fa fa-university"></i>Schools</a></li>
                 <li>
                     <a ui-sref="productEdit.info({id:0})">
                         Add Product
                     </a>
                 </li>
                 <li>
-                    <a ng-click="logout()">log off</a>
+                    <a ng-click="logout()"><i class="fa fa-sign-out"></i>log off</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav" ng-hide="isLoggedIn()">
                 <li>
-                    <a href="#" ng-click="open('login')">Login</a>
+                    <a href="#" ng-click="open('login')"><i class="fa fa-sign-in"></i>Login</a>
                 </li>
                 <li>
-                    <a href="#" ng-click="open('reg')">Register</a>
+                    <a href="#" ng-click="open('reg')"><i class="fa fa-user-md"></i>Register</a>
                 </li>
             </ul>
         </div>

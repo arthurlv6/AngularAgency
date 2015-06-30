@@ -1,8 +1,7 @@
-<div class="panel panel-primary"
-     ng-controller="schoolListCtrl as vm">
+<div class="panel panel-primary">
     <div class="panel-heading"
          style="font-size:large">
-        school List
+        School List
     </div>
     <div class="panel-body">
         <form class="navbar-form">
@@ -50,12 +49,12 @@
                     <td>{{ school.profession }}</td>
                     <td>{{ school.fee | currency }}</td>
                     <td>{{ school.commission | currency }}</td>
-                    <td>{{ school.schoolTypeId }}</td>
+                    <td>{{ school.schoolType.name }}</td>
                     <td>
-                        <a ng-click="vm.detail(school.id)">Detail</a>
+                        <a href="#" ng-click="vm.detail(school.id)">Detail</a>
                     </td>
                     <td>
-                        <a ng-click="vm.edit(school)">Edit</a>
+                        <a href="#" ng-click="vm.edit(school)">Edit</a>
                     </td>
                 </tr>
                 <tr ng-show="school.show">

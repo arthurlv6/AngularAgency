@@ -31,6 +31,10 @@ namespace Agency.Api.Controllers
         [ResponseType(typeof(ViewModelCustomer))]
         public IHttpActionResult GetCustomer(string id)
         {
+            if (id == "0")
+            {
+                return Ok(new ViewModelCustomer());
+            }
             var data = db.Customers.Where(d => d.Name.Contains(id)).Take(10).Include("Contracts.VisaType").Include("CustomerAudits.CustomerAuditFields");
             return Ok(getViewModelCustomerList(data.ToList()).AsQueryable());
         }
@@ -46,8 +50,20 @@ namespace Agency.Api.Controllers
         }
         // PUT: api/Customers/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCustomer(long id, Customer customer)
+        public async Task<IHttpActionResult> PutCustomer(long id, ViewModelCustomer VMcustomer)
         {
+            Mapper.CreateMap<ViewModelCustomer, Customer>().ForMember("Contracts", d => d.Ignore()).ForMember("CustomerAudits",d=>d.Ignore());
+            Customer customer;
+            try
+            {
+                 customer = Mapper.Map<ViewModelCustomer, Customer>(VMcustomer);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -58,10 +74,12 @@ namespace Agency.Api.Controllers
                 return BadRequest();
             }
 
-            db.Entry(customer).State = EntityState.Modified;
-
+            //db.Entry(customer).State = EntityState.Modified;
             try
             {
+                var existing = db.Customers.Find(id);
+                db.Entry(existing).CurrentValues.SetValues(customer);
+                CustomerDoAudit(existing, "system");
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -78,7 +96,43 @@ namespace Agency.Api.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        private void CustomerDoAudit(Customer entity, string user)
+        {
 
+            var audit = new CustomerAudit { Username = user, EventDtUtc = DateTime.Now, CustomerId = entity.Id };
+
+            var dbEntityEntry = db.Entry(entity);
+            foreach (var property in dbEntityEntry.OriginalValues.PropertyNames)
+            {
+                var original = dbEntityEntry.OriginalValues.GetValue<object>(property);
+                var current = dbEntityEntry.CurrentValues.GetValue<object>(property);
+                if (original == null && current != null)
+                    audit.CustomerAuditFields.Add(new CustomerAuditField()
+                    {
+                        Field = property.ToString(),
+                        OldValue = "None",
+                        NewValue = current.ToString()
+                    });
+                else if (original != null && current == null)
+                    audit.CustomerAuditFields.Add(new CustomerAuditField()
+                    {
+                        Field = property.ToString(),
+                        OldValue = original.ToString(),
+                        NewValue = "None"
+                    });
+                else if (original != null && !original.Equals(current))
+                    audit.CustomerAuditFields.Add(new CustomerAuditField()
+                    {
+                        Field = property.ToString(),
+                        OldValue = original.ToString(),
+                        NewValue = current.ToString()
+                    });
+            }
+            if (audit.CustomerAuditFields.Count > 0)
+            {
+                db.CustomerAudits.Add(audit);
+            }
+        }
         // POST: api/Customers
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> PostCustomer(Customer customer)

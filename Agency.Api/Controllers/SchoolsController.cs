@@ -22,17 +22,12 @@ namespace Agency.Api.Controllers
     {
         private AgencyDbContext db = new AgencyDbContext();
         // GET: api/Schools
-        [EnableQuery()]
-        [ResponseType(typeof(School))]
         public IHttpActionResult GetSchools()
         {
             try
             {
-                //var data=db.Schools.AsQueryable();
-                //Mapper.CreateMap<School, ViewModelSchool>();
-                //IList<ViewModelSchool> viewModelList =Mapper.Map<IList<School>, IList<ViewModelSchool>>(data.ToList());
-
-                return Ok(db.Schools.Where(d=>d.SchoolType.Id==1).AsQueryable());
+                var data = db.Schools.Include(d=>d.SchoolType).OrderByDescending(d => d.CreateDate).ToList();
+                return Ok(getViewModelSchoolList(data));
             }
             catch (Exception ex)
             {
@@ -41,39 +36,43 @@ namespace Agency.Api.Controllers
         }
 
         // GET: api/Schools/5
-        [ResponseType(typeof(School))]
-        public async Task<IHttpActionResult> GetSchool(long id)
+        [ResponseType(typeof(ViewModelSchool))]
+        public IHttpActionResult GetSchool(string id)
         {
-            School school = await db.Schools.FindAsync(id);
-            if (id > 0)
+            if (id == "0")
             {
-                if (school == null)
-                {
-                    return NotFound();
-                }
-            }else
-            {
-                school = new School() { UserId= "12ae3ecb-c59d-4ebf-9826-2ccbeb9f7838",SchoolTypeId=1,CreateDate=DateTime.Now };
+                return Ok( new School() { UserId = "12ae3ecb-c59d-4ebf-9826-2ccbeb9f7838", SchoolTypeId = 1, CreateDate = DateTime.Now });
             }
-            return Ok(school);
-        }
+            else
+            {
+                List<School> schools = db.Schools.Where(d=>d.Name.Contains(id)).ToList();
 
+                return Ok(getViewModelSchoolList(schools));
+            }
+            
+        }
+        private IList<ViewModelSchool> getViewModelSchoolList(IList<School> data)
+        {
+            Mapper.CreateMap<School, ViewModelSchool>();
+            Mapper.CreateMap<SchoolType, ViewModelSchoolType>();
+            IList<ViewModelSchool> viewModelList = Mapper.Map<IList<School>, IList<ViewModelSchool>>(data.ToList());
+            return viewModelList;
+        }
         // PUT: api/Schools/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutSchool(long id, School school)
+        public async Task<IHttpActionResult> PutSchool(long id, ViewModelSchool viewModelschool)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != school.Id)
+            if (id != viewModelschool.Id)
             {
                 return BadRequest();
             }
-
+            Mapper.CreateMap<ViewModelSchool,School>().ForMember("SchoolType",d=>d.Ignore());
+            var school=Mapper.Map<ViewModelSchool,School>(viewModelschool);
             db.Entry(school).State = EntityState.Modified;
-
             try
             {
                 await db.SaveChangesAsync();
@@ -89,19 +88,19 @@ namespace Agency.Api.Controllers
                     throw;
                 }
             }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Schools
-        [ResponseType(typeof(School))]
-        public async Task<IHttpActionResult> PostSchool(School school)
+        [ResponseType(typeof(ViewModelSchool))]
+        public async Task<IHttpActionResult> PostSchool(ViewModelSchool viewModelschool)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            Mapper.CreateMap<ViewModelSchool, School>().ForMember("SchoolType", d => d.Ignore());
+            var school = Mapper.Map<ViewModelSchool, School>(viewModelschool);
             db.Schools.Add(school);
             await db.SaveChangesAsync();
 

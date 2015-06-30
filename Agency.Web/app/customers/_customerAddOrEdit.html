@@ -1,0 +1,118 @@
+﻿<div >
+    <div class="modal-header">
+        <h3 class="modal-title">{{title}}</h3>
+    </div>
+    <form class="form-horizontal" name="schoolForm">
+        <div class="modal-body">
+            <tabset>
+                <tab heading="Basic information">
+                    <div class="tabGap">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="Name">Name</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="Name" ng-model="customer.name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="DOB">DOB</label>
+                                <div class="col-md-9">
+                                    <input type="date" class="form-control" id="DOB" value="{{customer.dob | date:'yyyy-MM-dd'}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="Number">Number</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="Number" ng-model="customer.number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="Reference">Reference</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="Reference" ng-model="customer.reference">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="CurrentSchool">CurrentSchool</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="CurrentSchool" ng-model="customer.currentSchool">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="CurrentPosition">CurrentPosition</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="CurrentPosition" ng-model="customer.currentPosition">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="PossibleVisaApply">PossibleVisaApply</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="PossibleVisaApply" ng-model="customer.possibleVisaApply">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="Status">Status</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="Status" ng-model="customer.status">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="NotificationDate">NotificationDate</label>
+                                <div class="col-md-9">
+                                    <input type="date" class="form-control" id="NotificationDate" value="{{customer.notificationDate | date:'yyyy-MM-dd'}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Contact">
+                    <div class="tabGap">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Phone">Phone</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="Phone" ng-model="customer.phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Email">Email</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="Email" ng-model="customer.email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="QQId">QQId</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="QQId" ng-model="customer.qQId">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Prefer">Prefer</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="Prefer" ng-model="customer.prefer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Detail">
+                    <div class="tabGap">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="customer" rows="10" cols="50"
+                                       ng-model="customer.detail">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+            {{message}}
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" ng-click="ok(schoolForm.$valid)" ng-disabled="schoolForm.$invalid">Confirm</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

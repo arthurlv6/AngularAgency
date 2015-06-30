@@ -20,7 +20,7 @@
                         templateUrl: "app/welcomeView.html"
                     })
                     // Products
-                    .state("customersList", {
+                    .state("customers", {
                         url: "/customers",
                         templateUrl: "app/customers/customerView.html",
                         controller: "customerCtrl as vm"

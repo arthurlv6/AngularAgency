@@ -19,11 +19,11 @@
                 });
         };
         vm.edit = function (customer) {
-            //console.log(school);
+            console.log("customer", customer);
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: "/app/customers/_addOrEdit.html",
-                controller: 'modalInstanceCtrl',
+                templateUrl: "/app/customers/_customerAddOrEdit.html",
+                controller: 'customerModalInstanceCtrl',
                 size: '',
                 resolve: {
                     item: function () {
@@ -44,8 +44,8 @@
             function (data) {
                 var modalInstance = $modal.open({
                     animation: true,
-                    templateUrl: "/app/customers/_addOrEdit.html",
-                    controller: 'modalInstanceCtrl',
+                    templateUrl: "/app/customers/_customerAddOrEdit.html",
+                    controller: 'customerModalInstanceCtrl',
                     size: '',
                     resolve: {
                         item: function () {
@@ -65,23 +65,22 @@
             });
         }
     }
-        app.controller("modalInstanceCtrl", ["customerResource", "currentUser", "item", "$scope", "$modalInstance", modalInstanceCtrl]);
-        function modalInstanceCtrl(customerResource, currentUser, item, $scope, $modalInstance) {
+    app.controller("customerModalInstanceCtrl", ["customerResource", "currentUser", "item", "$scope", "$modalInstance", customerModalInstanceCtrl]);
+    function customerModalInstanceCtrl(customerResource, currentUser, item, $scope, $modalInstance) {
             if (item.id === 0) {
                 $scope.title = "Add";
             } else {
                 $scope.title = "Edit";
             }
-            $scope.item = item;
-            console.log("item", item);
+            $scope.customer = item;
             $scope.ok = function (isValid) {
                 if (isValid) {
-                    if ($scope.item && $scope.item.id) {
-                        $scope.item.$update({ id: $scope.item.id }, function (data) {
+                    if ($scope.customer && $scope.customer.id) {
+                        $scope.customer.$update({ id: $scope.customer.id }, function (data) {
                             $scope.message = "Update Successful";
                         });
                     } else {
-                        $scope.item.$save(function (data) {
+                        $scope.customer.$save(function (data) {
                             $scope.message = "Save Successful";
                         });
                     }

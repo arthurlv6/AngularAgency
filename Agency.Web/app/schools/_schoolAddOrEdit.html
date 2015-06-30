@@ -1,6 +1,6 @@
 ﻿<div >
     <div class="modal-header">
-        <h3 class="modal-title">{{title}}</h3>
+        <h3 class="modal-title">{{vm.title}}</h3>
     </div>
     <form class="form-horizontal" name="schoolForm">
         <div class="modal-body">
@@ -8,28 +8,38 @@
                 <tab heading="Basic information">
                     <div class="tabGap">
                         <div class="form-group">
-                            <label for="SchoolName" class="col-sm-3 control-label">School Name</label>
+                            <label for="SchoolName" class="col-sm-3 control-label">SchoolName</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="SchoolName"
-                                       ng-model="school.name" required>
+                                       ng-model="vm.school.name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="SchoolType" class="col-sm-3 control-label">SchoolType</label>
+                            <div class="col-sm-9">
+                                <select class="form-control valid" id="SchoolType" ng-model="vm.school.schoolTypeId" >
+                                    <option ng-selected="vm.school.schoolTypeId===schoolType.id" ng-repeat="schoolType in vm.schoolTypes" value="{{schoolType.id}}">
+                                        {{schoolType.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Area" class="col-sm-3 control-label">Area</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="Area" ng-model="school.area">
+                                <input type="text" class="form-control" id="Area" ng-model="vm.school.area">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Profession" class="col-sm-3 control-label">Profession</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="Profession" ng-model="school.profession">
+                                <input type="text" class="form-control" id="Profession" ng-model="vm.school.profession">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Fee" class="col-sm-3 control-label">Fee</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="Fee" ng-model="school.fee" required>
+                                <input type="number" class="form-control" id="Fee" ng-model="vm.school.fee" required>
                             </div>
                         </div>
                     </div>
@@ -40,25 +50,25 @@
                             <label for="ContactName" class="col-sm-3 control-label">Contact Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="ContactName"
-                                       ng-model="school.contactName" required>
+                                       ng-model="vm.school.contactName" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="ContactNumber" class="col-sm-3 control-label">Contact Number</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="ContactNumber" ng-model="school.contactNumber">
+                                <input type="text" class="form-control" id="ContactNumber" ng-model="vm.school.contactNumber">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="website" class="col-sm-3 control-label">website</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="website" ng-model="school.website">
+                                <input type="text" class="form-control" id="website" ng-model="vm.school.website">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email" class="col-sm-3 control-label">email</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="email" ng-model="school.email">
+                                <input type="email" class="form-control" id="email" ng-model="vm.school.email">
                             </div>
                         </div>
                     </div>
@@ -68,18 +78,18 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <textarea class="form-control" id="detail" rows="10" cols="50"
-                                       ng-model="school.detail">
+                                       ng-model="vm.school.detail">
                                 </textarea>
                             </div>
                         </div>
                     </div>
                 </tab>
             </tabset>
-            {{message}}
+            {{vm.message}}
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" ng-click="ok(schoolForm.$valid)" ng-disabled="schoolForm.$invalid">Confirm</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            <button type="submit" class="btn btn-primary" ng-click="vm.ok(schoolForm.$valid)" ng-disabled="schoolForm.$invalid">Confirm</button>
+            <button class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
         </div>
     </form>
 </div>

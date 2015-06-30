@@ -13,7 +13,7 @@ namespace Agency.Api.ViewModels
         public long Id { get; set; }
         public long SchoolTypeId { get; set; }
         [ForeignKey("SchoolTypeId")]
-        public SchoolType SchoolType { get; set; }
+        public ViewModelSchoolType SchoolType { get; set; }
         [Required]
         [MaxLength(200)]
         public string Name { get; set; }
