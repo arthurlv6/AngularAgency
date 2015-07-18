@@ -1,0 +1,11 @@
+﻿<div class="row">
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="vm.radioModel" ui-sref="settingCompany" btn-radio="'Company'" >Company</label>
+        <label class="btn btn-primary" ng-model="vm.radioModel" ui-sref="settingVisaType" btn-radio="'VisaType'" >VisaType</label>
+        <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'SchoolType'" >SchoolType</label>
+        <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'Hospital'" >Hospital</label>
+        <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'ApplicationList'" >ApplicationList</label>
+        <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'User'" >User</label>
+    </div>
+</div>
+<div ui-view></div>

@@ -27,10 +27,11 @@
             });
         };
         $scope.logout = function () {
-            var user = currentUser.getProfile();
-            user.isLoggedIn = false;
-            user.userName = '';
-            user.access_token = '';
+            currentUser.removeProfile();
+            //var user = currentUser.getProfile();
+            //user.isLoggedIn = false;
+            //user.userName = '';
+            //user.access_token = '';
         };
     });
     app.controller('ModalRegisterInstanceCtrl', ["$scope", "$modalInstance", "userAccount", "currentUser", ModalRegisterInstanceCtrl]);

@@ -9,8 +9,13 @@
                 schoolResource]);
 
     function schoolResource($resource, appSettings, currentUser) {
-        return $resource(appSettings.serverPath + "/api/schools/:id", null,
+        return $resource(appSettings.serverPath + "/api/schools/", null,
             {
+                'query': {
+                    method: 'GET',
+                    isArray: true,
+                    headers: { 'Authorization': 'Bearer ' + currentUser.getProfile().token }
+                },
                 'get': {
                     headers: { 'Authorization': 'Bearer ' + currentUser.getProfile().token }
                 },

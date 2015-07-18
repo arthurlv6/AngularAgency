@@ -1,0 +1,201 @@
+﻿<div>
+    <div class="center-block" style="margin-bottom:10px;">
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-model="vm.radioModel" ui-sref="settingCompany" btn-radio="'Company'">Company</label>
+            <label class="btn btn-primary" ng-model="vm.radioModel" ui-sref="settingVisaType" btn-radio="'VisaType'">VisaType</label>
+            <label class="btn btn-primary" ng-model="vm.radioModel"  btn-radio="'SchoolType'">SchoolType</label>
+            <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'Hospital'">Hospital</label>
+            <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'ApplicationList'">ApplicationList</label>
+            <label class="btn btn-primary" ng-model="vm.radioModel" ng-click="vm.selected()" btn-radio="'User'">User</label>
+        </div>
+    </div>
+            <tabset>
+                <tab heading="Basic information">
+                    <div class="row tabGap">
+                        <div class="col-md-6">
+                            <div class="form-horizontal ">
+                                <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required." id="Id" name="Id" type="hidden" value="1">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="CompanyName">CompanyName</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line valid" data-val="true" data-val-maxlength="The field CompanyName must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="CompanyName" name="CompanyName" type="text" value="Easy solution " aria-invalid="false" aria-describedby="CompanyName-error">
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="CompanyName" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="TradingName">TradingName</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field TradingName must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="TradingName" name="TradingName" type="text" value="Test a">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="TradingName" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="GST">GST</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field GST must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="GST" name="GST" type="text" value="123-12-6789873">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="GST" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="Website">Website</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Website must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="Website" name="Website" type="text" value="www.google.com">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Website" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="Logo">Logo</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field Logo must be a string or array type with a maximum length of '200'." data-val-maxlength-max="200" id="Logo" name="Logo" type="text" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Logo" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Address">
+                    <div class="row tabGap">
+                        <div class="col-md-6">
+                            <div class="form-horizontal ">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="PostalName">PostalName</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line valid" data-val="true" data-val-maxlength="The field PostalName must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="PostalName" name="PostalName" type="text" value="7654333" aria-invalid="false" aria-describedby="PostalName-error">
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="PostalName" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="PostalAddress">PostalAddress</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field PostalAddress must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="PostalAddress" name="PostalAddress" type="text" value="123">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="PostalAddress" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="PostalCode">PostalCode</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field PostalCode must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="PostalCode" name="PostalCode" type="text" value="123">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="PostalCode" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactName">ContactName</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactName must be a string or array type with a maximum length of '100'." data-val-maxlength-max="100" id="ContactName" name="ContactName" type="text" value="Lina Guo">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactName" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactEmail">ContactEmail</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactEmail must be a string or array type with a maximum length of '256'." data-val-maxlength-max="256" id="ContactEmail" name="ContactEmail" type="text" value="lina@gmail.com">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactEmail" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactAddress">ContactAddress</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactAddress must be a string or array type with a maximum length of '200'." data-val-maxlength-max="200" id="ContactAddress" name="ContactAddress" type="text" value="Auckland city">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactAddress" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactOfficePhone">ContactOfficePhone</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactOfficePhone must be a string or array type with a maximum length of '50'." data-val-maxlength-max="50" id="ContactOfficePhone" name="ContactOfficePhone" type="text" value="02186534567">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactOfficePhone" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactQQ">ContactQQ</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactQQ must be a string or array type with a maximum length of '50'." data-val-maxlength-max="50" id="ContactQQ" name="ContactQQ" type="text" value="123">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactQQ" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactPhoneNumber">ContactPhoneNumber</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactPhoneNumber must be a string or array type with a maximum length of '50'." data-val-maxlength-max="50" id="ContactPhoneNumber" name="ContactPhoneNumber" type="text" value="123">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactPhoneNumber" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactFaxNumber">ContactFaxNumber</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactFaxNumber must be a string or array type with a maximum length of '50'." data-val-maxlength-max="50" id="ContactFaxNumber" name="ContactFaxNumber" type="text" value="093456788">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactFaxNumber" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="ContactMobileNumber">ContactMobileNumber</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-maxlength="The field ContactMobileNumber must be a string or array type with a maximum length of '50'." data-val-maxlength-max="50" id="ContactMobileNumber" name="ContactMobileNumber" type="text" value="">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="ContactMobileNumber" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Notification">
+                    <div class="row tabGap">
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="NotificationVisaDays">NotificationVisaDays</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line valid" data-val="true" data-val-number="The field NotificationVisaDays must be a number." data-val-required="The NotificationVisaDays field is required." id="NotificationVisaDays" name="NotificationVisaDays" type="number" value="60" aria-required="true" aria-invalid="false" aria-describedby="NotificationVisaDays-error">
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="NotificationVisaDays" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="NotificationInsuranceDays">NotificationInsuranceDays</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field NotificationInsuranceDays must be a number." data-val-required="The NotificationInsuranceDays field is required." id="NotificationInsuranceDays" name="NotificationInsuranceDays" type="number" value="60">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="NotificationInsuranceDays" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4" for="NotificationCustomerDays">NotificationCustomerDays</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control text-box single-line" data-val="true" data-val-number="The field NotificationCustomerDays must be a number." data-val-required="The NotificationCustomerDays field is required." id="NotificationCustomerDays" name="NotificationCustomerDays" type="number" value="100">
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="NotificationCustomerDays" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+    <div class="center-block">
+        <button class="btn btn-info" id="plunk-btn" ng-click="vm.save()"><i class="glyphicon glyphicon-floppy-save"></i>Save</button>
+    </div>
+</div>

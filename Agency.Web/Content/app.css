@@ -8,3 +8,9 @@
 .navbar{
     border-radius:0px;
 }
+.pagination {
+    margin:0px;
+}
+.navbar-form{
+    margin:0px;
+}

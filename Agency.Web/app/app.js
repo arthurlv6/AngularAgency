@@ -4,7 +4,8 @@
         ["common.services",
             "ui.mask",
             "ui.bootstrap",
-            "ui.router"]);
+            "ui.router",
+        "ngCookies"]);
     
 
     app.config(["$stateProvider",
@@ -63,6 +64,16 @@
                                 return productResource.get({ id: productId }).$promise;
                             }
                         }
+                    })
+                    .state("setting", {
+                        url: "/setting",
+                        templateUrl: "app/settings/settingMainCtrl.html",
+                        controller: "settingMainCtrl as vm"
+                    })
+                    .state("settingCompany", {
+                        url: "/settingCompany",
+                        templateUrl: "app/settings/_company.html",
+                        controller: "settingCompanyCtrl as vm"
                     })
                 .state("schoolList", {
                     url: "/schools",

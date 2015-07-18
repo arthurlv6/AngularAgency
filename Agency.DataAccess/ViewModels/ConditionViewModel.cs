@@ -22,7 +22,7 @@ namespace Agency.DataAccess.ViewModels
         public string Order { get; set; }
         public bool ChangeOrderDirection { get; set; }
         public string OrderDirection { get; set; }
-        public List<T> Data { get; set; }
+        public IList<T> Data { get; set; }
         public Expression<Func<T, bool>> Func { get; set; }
         
     }

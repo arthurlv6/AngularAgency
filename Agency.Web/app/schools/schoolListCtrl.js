@@ -4,25 +4,40 @@
     app.controller("schoolListCtrl",["schoolResource","schoolTypesResource", '$log', '$modal', schoolListCtrl]);
     function schoolListCtrl(schoolResource,schoolTypesResource, $log, $modal) {
             var vm = this;
-        vm.schoolSearchInput = "";
+            vm.searchInput = "";
+            vm.pageNumber = 1;
+            vm.totalCount = 0;
+            vm.maxSize = 5;
         vm.loadData = function () {
-            schoolResource.query(
+            schoolResource.query({ search: '', pageNumber :1},
             function (data) {
                 schoolTypesResource.query(null, function (schoolTypeData) {
                     vm.schoolTypes = schoolTypeData;
-                    console.log("get vm.schoolTypes", vm.schoolTypes);
+                    //console.log("DATA", data);
                     vm.schools = data;
                 });
+            });
+            schoolResource.get({ condition: '' },
+            function (data) {
+                vm.totalCount = data.count;
+                console.log("totalCount", data.count);
             });
         };
         vm.loadData();
         vm.search = function() {
-            schoolResource.query({ id: vm.searchInput },
+            schoolResource.query({ search: vm.searchInput, pageNumber: vm.pageNumber },
                 function(data) {
-                    vm.schools = data;
-                    console.log("search data return", data);
-                    $log.userMessage("geting data from the remote server.");
+                    schoolTypesResource.query(null, function (schoolTypeData) {
+                        vm.schoolTypes = schoolTypeData;
+                        //console.log("get vm.schoolTypes", vm.schoolTypes);
+                        vm.schools = data;
+                        console.log("data", data);
+                    });
                 });
+            schoolResource.get({ condition: vm.searchInput },
+            function (data) {
+                vm.totalCount = data.count;
+            });
         };
         vm.edit = function (school) {
             //console.log(school);
@@ -68,9 +83,24 @@
             });
             
         };
+        vm.orderBy = "id";
+        vm.setOrderBy = function (item) {
+            if (vm.orderBy === item) {
+                vm.orderBy = "-"+item;
+            } else {
+                vm.orderBy = item;
+            }
+
+            
+        }
+        //pagination
+        vm.pageChanged = function () {
+            vm.search();
+            console.log('Page changed to: '+vm.pageNumber);
+        };
     }
-    app.controller("schoolModalInstanceCtrl", ["schoolResource", "currentUser", "schoolItem", "schoolTypes", "$scope", "$modalInstance", modalInstanceCtrl]);
-    function modalInstanceCtrl(schoolResource, currentUser, schoolItem,schoolTypes, $scope, $modalInstance) {
+    app.controller("schoolModalInstanceCtrl", ["schoolResource", "currentUser", "schoolItem", "schoolTypes", "$scope", "$modalInstance", "$filter", modalInstanceCtrl]);
+    function modalInstanceCtrl(schoolResource, currentUser, schoolItem, schoolTypes, $scope, $modalInstance, $filter) {
             var vm = this;
             vm.schoolTypes = schoolTypes;
             console.log("vm.schoolTypes", vm.schoolTypes);
@@ -85,17 +115,21 @@
                 if (isValid) {
                     if (vm.school && vm.school.id) {
                         vm.school.$update({ id: vm.school.id }, function (data) {
-                            console.log("update return",data);
-                            //$scope.loadData();
+                            vm.schoolTypes.forEach(function (item) {
+                                if (item.id == data.schoolTypeId) {
+                                    vm.school.schoolType.name = item.name;
+                                }
+                            });
                             $modalInstance.dismiss();
-                            //vm.message = "Update Successful";
                         });
                     } else {
                         vm.school.$save(function (data) {
-                            //$scope.loadData();
-                            console.log("save return",data);
+                            vm.schoolTypes.forEach(function (item) {
+                                if (item.id == data.schoolTypeId) {
+                                    vm.school.schoolType.name = item.name;
+                                }
+                            });
                             $modalInstance.dismiss();
-                            //vm.message = "Save Successful";
                         });
                     }
                 } else {
@@ -105,5 +139,5 @@
             vm.cancel=function(){
                 $modalInstance.dismiss('cancel');
             };
-        }
+    }
 }());

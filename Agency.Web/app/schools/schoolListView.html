@@ -4,44 +4,53 @@
         School List
     </div>
     <div class="panel-body">
-        <form class="navbar-form">
-            <div class="form-group">
-                <input type="text"
-                       class="form-control"
-                       style="width: 300px;"
-                       placeholder="school Name or Code (letter sensitive)"
-                       ng-model="vm.schoolSearchInput">
-            </div>
+        <div class="row">
+            <div class="col-md-5">
+                <form class="navbar-form">
+                    <div class="form-group">
+                        <input type="text"
+                               class="form-control"
+                               style="width: 300px;"
+                               placeholder="school Name"
+                               ng-model="vm.searchInput">
+                    </div>
 
-            <button type="submit"
-                    class="btn btn-default btn-primary"
-                    ng-click="vm.search()">
-                Search
-            </button>
-            
-            <div ng-show="vm.message">{{vm.message}}</div>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <button class="btn btn-default btn-primary" ng-click="vm.add()"> Add</button>
-                </li>
-            </ul>
-        </form>
-        <table class="table table-hover table-striped table-responsive">
+                    <button type="submit"
+                            class="btn btn-default btn-primary"
+                            ng-click="vm.search()">
+                        Search
+                    </button>
+                </form>
+            </div>
+           
+            <div class="col-md-7">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <pagination ng-click="vm.pageChanged()" total-items="vm.totalCount" ng-model="vm.pageNumber" max-size="vm.maxSize" class="pagination" boundary-links="true" rotate="false" ></pagination>
+                    </li>
+                    <li style="margin-left:10px;">
+                        <button class="btn btn-default btn-primary" ng-click="vm.add()"> Add</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <table class="table table-responsive table-condensed table-hover">
             <thead>
                 <tr>
-                    <td>Id</td>
-                    <td>Name</td>
-                    <td>Area</td>
-                    <td>Profession</td>
-                    <td>Fee</td>
-                    <td>Commission</td>
-                    <td>SchoolType</td>
+                    
+                    <td><a href="#" ng-click="vm.setOrderBy('name')">Name</a></td>
+                    <td><a href="#" ng-click="vm.setOrderBy('area')">Area</a></td>
+                    <td><a href="#" ng-click="vm.setOrderBy('profession')">Profession</a></td>
+                    <td><a href="#" ng-click="vm.setOrderBy('fee')">Fee</a></td>
+                    <td><a href="#" ng-click="vm.setOrderBy('commission')">Commission</a></td>
+                    <td><a href="#" ng-click="vm.setOrderBy('schoolType.name')">SchoolType</a></td>
+                    <td><a href="#" ng-click="vm.setOrderBy('createDate')">CreateDate</a></td>
                     <td colspan="2"></td>
                 </tr>
             </thead>
-            <tbody ng-repeat="school in vm.schools">
+            <tbody ng-repeat="school in vm.schools| orderBy:vm.orderBy">
                 <tr>
-                    <td>{{ school.id }}</td>
                     <td>
                             {{ school.name}}
                     </td>
@@ -50,6 +59,7 @@
                     <td>{{ school.fee | currency }}</td>
                     <td>{{ school.commission | currency }}</td>
                     <td>{{ school.schoolType.name }}</td>
+                    <td>{{ school.createDate }}</td>
                     <td>
                         <a href="#" ng-click="vm.detail(school.id)">Detail</a>
                     </td>

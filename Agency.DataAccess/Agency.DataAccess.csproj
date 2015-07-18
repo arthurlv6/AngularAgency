@@ -68,6 +68,7 @@
     <Compile Include="Containers\SettingContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\ReturnApiDataViewModel.cs" />
     <Compile Include="ViewModels\ReceiptViewModel.cs" />
     <Compile Include="ViewModels\CheckListViewModel.cs" />
     <Compile Include="ViewModels\ConditionViewModel.cs" />

@@ -13,11 +13,11 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" ng-hide="isLoggedIn()">
+            <ul class="nav navbar-nav" ng-show="isLoggedIn()">
                 <li><a ui-sref="customers"><i class="fa fa-group"></i>Customers</a></li>
                 <li><a ui-sref="schoolList"><i class="fa fa-sitemap"></i>Contracts</a></li>
                 <li><a ui-sref="schoolList"><i class="fa fa-bell"></i>Notifications</a></li>
-                <li><a ui-sref="schoolList"><i class="fa fa-gears"></i>Settings</a></li>
+                <li><a ui-sref="settingCompany"><i class="fa fa-gears"></i>Settings</a></li>
                 <li><a ui-sref="schoolList"><i class="fa fa-university"></i>Schools</a></li>
                 <li>
                     <a ui-sref="productEdit.info({id:0})">
