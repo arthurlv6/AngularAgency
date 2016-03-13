@@ -1,69 +1,23 @@
 (function () {
     "use strict";
     var app = angular.module("main",
-        ["common.services",
-            "ui.mask",
-            "ui.bootstrap",
-            "ui.router",
-        "ngCookies"]);
+        ["common.services", "ui.mask", "ui.bootstrap", "ui.router", "ngCookies"]);
     
-
-    app.config(["$stateProvider",
-            "$urlRouterProvider",'$provide', '$logProvider',
+    app.config(["$stateProvider","$urlRouterProvider",'$provide', '$logProvider',
             function ($stateProvider, $urlRouterProvider, $provide,$logProvider) {
                 $logProvider.debugEnabled(true);
                 $provide.decorator('$log', ['$delegate', logDecorator]);
-
-                $urlRouterProvider.otherwise("/customers");
+                $urlRouterProvider.otherwise("home");
                 $stateProvider
                     .state("home", {
-                        url: "/",
-                        templateUrl: "app/welcomeView.html"
+                        url: "/home",
+                        templateUrl: "app/home/welcomeView.html",
+                        controller: "welcomeCtrl as vm"
                     })
-                    // Products
                     .state("customers", {
                         url: "/customers",
                         templateUrl: "app/customers/customerView.html",
                         controller: "customerCtrl as vm"
-                    })
-                    .state("login", {
-                        url: "/login",
-                        templateUrl: "app/login.html",
-                        controller: "ProductListCtrl as vm"
-                    })
-                    .state("productEdit", {
-                        abstract: true,
-                        url: "/products/edit/:id",
-                        templateUrl: "app/products/productEditView.html",
-                        controller: "ProductEditCtrl as vm",
-                        resolve: {
-                            productResource: "productResource",
-                            product: function (productResource, $stateParams) {
-                                var pid = $stateParams.id;
-                                return productResource.get({ id: pid }).$promise;
-                            }
-                        }
-                    })
-                    .state("productEdit.info", {
-                        url: "/info",
-                        templateUrl: "app/products/productEditInfoView.html"
-                    })
-                    .state("productEdit.price", {
-                        url: "/price",
-                        templateUrl: "app/products/productEditPriceView.html"
-                    })
-                    .state("productDetail", {
-                        url: "/products/:productId",
-                        templateUrl: "app/products/productDetailView.html",
-                        controller: "ProductDetailCtrl as vm",
-                        resolve: {
-                            productResource: "productResource",
-
-                            product: function(productResource, $stateParams) {
-                                var productId = $stateParams.productId;
-                                return productResource.get({ id: productId }).$promise;
-                            }
-                        }
                     })
                     .state("setting", {
                         url: "/setting",

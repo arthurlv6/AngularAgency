@@ -12,7 +12,7 @@ namespace Agency.Data.DataContexts
     public class AgencyDbContext : IdentityDbContext<ApplicationUser>
     {
         public AgencyDbContext()
-            : base("Agency", throwIfV1Schema: false)
+            : base("AgencyAgain", throwIfV1Schema: false)
         {
         }
         public DbSet<ErrorLog> ErrorLogs { get; set; }

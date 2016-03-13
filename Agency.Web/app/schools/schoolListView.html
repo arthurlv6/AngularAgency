@@ -5,61 +5,64 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-lg-5 col-md-12">
+                
                 <form class="navbar-form">
-                    <div class="form-group">
-                        <input type="text"
-                               class="form-control"
-                               style="width: 300px;"
-                               placeholder="school Name"
-                               ng-model="vm.searchInput">
-                    </div>
-
-                    <button type="submit"
-                            class="btn btn-default btn-primary"
-                            ng-click="vm.search()">
-                        Search
-                    </button>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <input type="text"
+                                   class="form-control"
+                                   style="width: 300px;"
+                                   placeholder="school Name"
+                                   ng-model="vm.searchInput">
+                        </li>
+                        <li style="margin-left:10px;margin-right:10px;">
+                            <button type="submit"
+                                    class="btn btn-default btn-primary"
+                                    ng-click="vm.search()">
+                                Search
+                            </button>
+                        </li>
+                    </ul>
                 </form>
             </div>
-           
-            <div class="col-md-7">
+
+            <div class="col-lg-7 col-md-12">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <pagination ng-click="vm.pageChanged()" total-items="vm.totalCount" ng-model="vm.pageNumber" max-size="vm.maxSize" class="pagination" boundary-links="true" rotate="false" ></pagination>
+                        <pagination ng-click="vm.pageChanged()" total-items="vm.totalCount" ng-model="vm.pageNumber" max-size="vm.maxSize" class="pagination" boundary-links="true" rotate="false"></pagination>
                     </li>
-                    <li style="margin-left:10px;">
+                    <li style="margin-left:10px;margin-right:10px;">
                         <button class="btn btn-default btn-primary" ng-click="vm.add()"> Add</button>
                     </li>
                 </ul>
             </div>
         </div>
-        
-        <table class="table table-responsive table-condensed table-hover">
+
+        <table class="table table-responsive table-hover">
             <thead>
                 <tr>
-                    
                     <td><a href="#" ng-click="vm.setOrderBy('name')">Name</a></td>
-                    <td><a href="#" ng-click="vm.setOrderBy('area')">Area</a></td>
-                    <td><a href="#" ng-click="vm.setOrderBy('profession')">Profession</a></td>
-                    <td><a href="#" ng-click="vm.setOrderBy('fee')">Fee</a></td>
-                    <td><a href="#" ng-click="vm.setOrderBy('commission')">Commission</a></td>
-                    <td><a href="#" ng-click="vm.setOrderBy('schoolType.name')">SchoolType</a></td>
-                    <td><a href="#" ng-click="vm.setOrderBy('createDate')">CreateDate</a></td>
+                    <td class="hidden-sm hidden-xs"><a href="#" ng-click="vm.setOrderBy('area')">Area</a></td>
+                    <td class="hidden-sm hidden-xs"><a href="#" ng-click="vm.setOrderBy('profession')">Profession</a></td>
+                    <td class="hidden-sm hidden-xs"><a href="#" ng-click="vm.setOrderBy('fee')">Fee</a></td>
+                    <td class="hidden-sm hidden-xs hidden-md"><a href="#" ng-click="vm.setOrderBy('commission')">Commission</a></td>
+                    <td class="hidden-sm hidden-xs hidden-md"><a href="#" ng-click="vm.setOrderBy('schoolType.name')">SchoolType</a></td>
+                    <td class="hidden-sm hidden-xs hidden-md"><a href="#" ng-click="vm.setOrderBy('createDate')">CreateDate</a></td>
                     <td colspan="2"></td>
                 </tr>
             </thead>
             <tbody ng-repeat="school in vm.schools| orderBy:vm.orderBy">
                 <tr>
                     <td>
-                            {{ school.name}}
+                        {{ school.name}}
                     </td>
-                    <td>{{ school.area }}</td>
-                    <td>{{ school.profession }}</td>
-                    <td>{{ school.fee | currency }}</td>
-                    <td>{{ school.commission | currency }}</td>
-                    <td>{{ school.schoolType.name }}</td>
-                    <td>{{ school.createDate }}</td>
+                    <td class="hidden-sm hidden-xs">{{ school.area }}</td>
+                    <td class="hidden-sm hidden-xs">{{ school.profession }}</td>
+                    <td class="hidden-sm hidden-xs">{{ school.fee | currency }}</td>
+                    <td class="hidden-sm hidden-xs hidden-md">{{ school.commission | currency }}</td>
+                    <td class="hidden-sm hidden-xs hidden-md">{{ school.schoolType.name }}</td>
+                    <td class="hidden-sm hidden-xs hidden-md">{{ school.createDate }}</td>
                     <td>
                         <a href="#" ng-click="vm.detail(school.id)">Detail</a>
                     </td>
@@ -131,14 +134,44 @@
                                 <dd>
                                     {{ school.operator }}
                                 </dd>
-                                <dt>
+                                <dt class="hidden-lg">
+                                    Area
+                                </dt>
+                                <dd class="hidden-lg">
+                                    {{ school.area }}
+                                </dd>
+                                <dt class="hidden-lg">
+                                    Profession
+                                </dt>
+                                <dd class="hidden-lg">
+                                    {{ school.profession }}
+                                </dd>
+                                <dt class="hidden-lg">
+                                    Fee
+                                </dt>
+                                <dd class="hidden-lg">
+                                    {{ school.fee | currency}}
+                                </dd>
+                                <dt class="hidden-lg">
+                                    Commission
+                                </dt>
+                                <dd class="hidden-lg">
+                                    {{ school.commission | currency}}
+                                </dd>
+                                <dt class="hidden-lg">
+                                    TypeName
+                                </dt>
+                                <dd class="hidden-lg">
+                                    {{ school.schoolType.name }}
+                                </dd>
+
+                                <dt class="hidden-lg">
                                     CreateDate
                                 </dt>
 
-                                <dd>
+                                <dd class="hidden-lg">
                                     {{ school.createDate }}
                                 </dd>
-
                             </dl>
                         </div>
                     </td>

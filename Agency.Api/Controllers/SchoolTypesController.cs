@@ -18,11 +18,11 @@ namespace Agency.Api.Controllers
 {
     public class SchoolTypesController : ApiController
     {
-        IBaseOperations _baseOperations;
-        public SchoolTypesController(IBaseOperations baseOperations)
-        {
-            _baseOperations = baseOperations;
-        }
+        IBaseOperations _baseOperations=new BaseOperations();
+        //public SchoolTypesController(IBaseOperations baseOperations)
+        //{
+        //    _baseOperations = new BaseOperations();
+        //}
         // GET: api/SchoolTypes
         public IQueryable<ViewModelSchoolType> GetSchoolTypes()
         {
